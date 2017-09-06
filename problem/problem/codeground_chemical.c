@@ -25,46 +25,13 @@ int main() {
 
 	int i, j;
 
-
-	for (i = 0; i < 114; i++) {
-		for (j = 0; syx[i][j] != NULL; j++) {
-			if (syx[i][j] >= 'a' && syx[i][j] <= 'z') {
-				syx[i][j] -= 'a';
-				syx[i][j]++;
-			}
-			else if (syx[i][j] >= 'A' && syx[i][j] <= 'Z') {
-				syx[i][j] -= 'A';
-				syx[i][j]++;
-			}
+	for (i = 0; i<sizeof(syx) / 3; i++) {
+		if (syx[i][1] == NULL) {
+			arr[syx[i][0] - 'A'][0] = 1;
 		}
-	}
-
-
-	for (i = 0; i < 114; i++) {
-		for (j = 0; syx[i][j] != 0; j++) {
-			if (j == 0) {
-				if(syx[i][1] == 0)
-					arr[syx[i][0] - 1][0] = 1;
-			}
-			else{
-				arr[syx[i][0] - 1][syx[i][1]] = 1;
-			}
+		else {
+			arr[syx[i][0] - 'A'][syx[i][1] - 'a' + 1] = 1;
 		}
-	}
-	printf("     ");
-
-	for (i = 0; i < 26; i++) {
-		printf("%c ", i + 65);
-	}
-
-	printf("\n");
-
-	for (i = 0; i < 26; i++) {
-		printf("%c: ", i + 65);
-		for (j = 0; j < 27; j++) {
-			printf("%d ", arr[i][j]);
-		}
-		printf("\n");
 	}
 
 	fscanf(fp,"%d", &count);
