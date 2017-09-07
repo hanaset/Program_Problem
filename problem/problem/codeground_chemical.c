@@ -4,7 +4,7 @@
 
 int main() {
 
-	FILE *fp = fopen("sample_input.txt", "r");
+	FILE *fp = fopen("test.txt", "w");
 
 	char syx[][3] = { "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al",
 		"Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe",
@@ -21,9 +21,10 @@ int main() {
 	int check;
 	int num;
 
-	char ch[10000] = { 0, };
+	char ch[50001] = { 0, };
 
-	int i, j;
+	int i;
+	setbuf(stdout, NULL);
 
 	for (i = 0; i<sizeof(syx) / 3; i++) {
 		if (syx[i][1] == NULL) {
@@ -34,84 +35,33 @@ int main() {
 		}
 	}
 
-	fscanf(fp,"%d", &count);
+	scanf("%d", &T);
+	for (test_case = 0; test_case < T; test_case++)
+	{
 
-	for (i = 0; i < count; i++) {
-		fscanf(fp, "%s\n", ch);
+		printf("Case #%d\n", test_case + 1);
 
-		num = 0;
-		check = 0;
-		printf("%s\n", ch);
+		for (i = 0; i<ch[i]; i++) {
 
-		while (1) {
-
-			printf("%d ", check);
-
-			if (arr[ch[check] - 'a'][0] == 0) {
-				if (arr[ch[check] - 'a'][ch[check + 1] - 'a' + 1] == 0) {
-					num++;
-					printf("NO\n");
-					break;
-				}
-				else {
-					check += 2;
-				}
-			}
-			else {
-				check++;
+			check = 0;
+			if (arr[ch[i] - 'a'][0]) {
+				check = 1;
 			}
 
-			if (ch[check] == NULL)
-				break;
-		}
-
-		if (num == 0)
-			printf("YES\n");
-
-
-
-
-
-
-
-
-
-		/*
-		while (1) {
-			printf("%d ", check);
-			if (arr[ch[check] - 'a'][ch[check+1] - 'a'+1] == 0) {
-				if (arr[ch[check] - 'a'][0] == 0) {
-					check -= 2;
-					if (arr[ch[check] - 'a'][0] != 0) {
-						check++;
-						getch();
-						continue;
-					}
-					printf("NO\n");
-					num++;
-					break;
-				}
-				else {
-					check++;
-				}
-			}
-			else {
-				check += 2;
+			if (ch[i + 1] != NULL && arr[ch[i] - 'a'][ch[i + 1] - 'a' + 1]) {
+				check = 2;
 			}
 
-			if (ch[check] == NULL) {
+			if (check == 0) {
 				break;
 			}
-			
+			else if (check == 2) {
+				i++;
+			}
 		}
 
-		if (num == 0) {
-			printf("Yes\n");
-			num = 0;
-		}
-
-		*/
+		printf("%s\n", check == 0 ? "NO" : "YES");
 	}
 
-	
+	return 0;//Your program should return 0 on normal termination.
 }
